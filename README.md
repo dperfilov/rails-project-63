@@ -1,5 +1,5 @@
 # Hexlet Actions Status
-[Build](https://github.com/dperfilov/rails-project-63/actions/workflows/hexlet-check.yml/badge.svg)
+![hexlet-check](https://github.com/dperfilov/rails-project-63/actions/workflows/hexlet-check.yml/badge.svg)
 
 # HexletCode
 
