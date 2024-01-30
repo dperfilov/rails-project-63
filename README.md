@@ -1,5 +1,7 @@
-# Hexlet Actions Status
+# Status
 ![hexlet-check](https://github.com/dperfilov/rails-project-63/actions/workflows/hexlet-check.yml/badge.svg)
+
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/dperfilov/rails-project-63)
 
 # HexletCode
 
