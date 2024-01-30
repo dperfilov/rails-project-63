@@ -2,6 +2,6 @@ install: # установить зависимости
 	bundle install
 
 lint:
-	rubocop
+	rubocop --fail-level=error
 
 tests:
