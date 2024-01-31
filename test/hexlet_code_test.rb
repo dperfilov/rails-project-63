@@ -18,7 +18,7 @@ class HexletCodeTest < Minitest::Test
 			with_url: '<form action="/users" method="post"></form>'
 		}
 
-		@User = Struct.new(:name, :job, keyword_init: true)
+		# User = Struct.new(:name, :job, keyword_init: true)
 		# @user = User.new name: 'rob'
 	end
 
@@ -31,10 +31,10 @@ class HexletCodeTest < Minitest::Test
 	end
 
 	def test_basic_form_generator
-		user = User.new name: 'rob'
-		puts user.name
+		@User = Struct.new(:name, :job, keyword_init: true)
+		user = @User.new name: 'rob'
 
-		# почему то не работает передача переменной user без скобок
+		# почему то не работает передача параметра user без скобок
 		assert { @expected_forms[:basic] == HexletCode.form_for(user) { |f| } }
 		assert { @expected_forms[:with_url] == HexletCode.form_for(user, url: '/users') { |f| } }
 	end
