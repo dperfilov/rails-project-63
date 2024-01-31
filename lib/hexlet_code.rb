@@ -1,35 +1,27 @@
 # frozen_string_literal: true
 
 require_relative "hexlet_code/version"
+require_relative 'tag_module'
 
 module HexletCode
   class Error < StandardError; end
 
-
   class Tag
-    def self.build tag_name, **params
-      paired = ['label', 'div']
+    extend TagModule
+  end
 
-      result = []
-      result << '<'
-      result << tag_name
 
-      # add attributes from hash
-      params.each do |key, value|
-        result << " #{key}=\"#{value}\""
-      end if !params.empty?
-
-      result << '>'
-
-      # add body from given block
-      if block_given?
-        result << yield
-      end
-
-      # for paired tags add closing part
-      result << "</#{tag_name}>" if paired.include? tag_name
-
-      result.join
-    end
+  def self.form_for
   end
 end
+
+puts HexletCode::Tag.build('br')
+
+# Создаем класс User с полями name и job
+User = Struct.new(:name, :job, keyword_init: true)
+# Создаем конкретно пользователя и заполняем имя
+user = User.new name: 'rob'
+puts user.name
+
+
+HexletCode.form_for
