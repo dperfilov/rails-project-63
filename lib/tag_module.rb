@@ -1,6 +1,6 @@
 module TagModule
 
-	def build tag_name, **params
+	def build tag_name, params={}
 	  # void elements area, base, br, col, embed, hr, img, input, link, meta, source, track, wbr
 	  unpaired = ['br', 'hr', 'img', 'input', 'link']
 
