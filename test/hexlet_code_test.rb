@@ -18,8 +18,11 @@ class HexletCodeTest < Minitest::Test
 			with_url: '<form action="/users" method="post"></form>'
 		}
 
-		# User = Struct.new(:name, :job, keyword_init: true)
-		# @user = User.new name: 'rob'
+		@User = Struct.new(:name, :job, keyword_init: true)
+		@user_rob = @User.new name: 'rob'
+
+		@UserWithGender = Struct.new(:name, :job, :gender, keyword_init: true)
+		@user_rob_with_gender = @UserWithGender.new name: 'rob', job: 'hexlet', gender: 'm'
 	end
 
 	def test_tags_builder
@@ -31,11 +34,50 @@ class HexletCodeTest < Minitest::Test
 	end
 
 	def test_basic_form_generator
-		@User = Struct.new(:name, :job, keyword_init: true)
-		user = @User.new name: 'rob'
+		# @User = Struct.new(:name, :job, keyword_init: true)
+		# user = @User.new name: 'rob'
 
 		# почему то не работает передача параметра user без скобок
-		assert { @expected_forms[:basic] == HexletCode.form_for(user) { |f| } }
-		assert { @expected_forms[:with_url] == HexletCode.form_for(user, url: '/users') { |f| } }
+		assert { @expected_forms[:basic] == HexletCode.form_for(@user_rob) { |f| } }
+		assert { @expected_forms[:with_url] == HexletCode.form_for(@user_rob, url: '/users') { |f| } }
+	end
+
+	def test_form_1_with_fields
+		result = HexletCode.form_for @user_rob_with_gender do |f|
+				  # Проверяет есть ли значение внутри name
+				  f.input :name
+				  # Проверяет есть ли значение внутри job
+				  f.input :job, as: :text
+				end
+
+		assert { result == File.open('fixtures/form_1.html').read }
+	end
+
+	# Для полей можно указать дополнительные атрибуты в виде хеша последним параметром
+	def test_form_2_with_additional_attributes
+		result = HexletCode.form_for @user_rob_with_gender, url: '#' do |f|
+				  f.input :name, class: 'user-input'
+				  f.input :job
+				end
+
+		assert { result == File.open('fixtures/form_2.html').read }
+	end
+
+	# У полей могут быть дефолтные значения, которые можно переопределить
+	def test_form_3_with_default_values
+		result = HexletCode.form_for @user_rob_with_gender do |f|
+					f.input :job, as: :text
+				end
+
+		assert { result == File.open('fixtures/form_3.html').read }
+	end
+
+	# пример с переопределением атрибутов rows and cols
+	def test_form_4_with_default_values_override
+		result = HexletCode.form_for @user_rob_with_gender, url: '#' do |f|
+				  f.input :job, as: :text, rows: 50, cols: 50
+				end
+
+		assert { result == File.open('fixtures/form_4.html').read }
 	end
 end
