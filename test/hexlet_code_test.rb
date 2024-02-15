@@ -50,7 +50,7 @@ class HexletCodeTest < Minitest::Test
 				  f.input :job, as: :text
 				end
 
-		assert { result == File.open('fixtures/form_1.html').read }
+		assert { result == read_html_fixture(__method__.to_s) }
 	end
 
 	# Для полей можно указать дополнительные атрибуты в виде хеша последним параметром
@@ -60,7 +60,7 @@ class HexletCodeTest < Minitest::Test
 				  f.input :job
 				end
 
-		assert { result == File.open('fixtures/form_2.html').read }
+		assert { result == read_html_fixture(__method__.to_s) }
 	end
 
 	# У полей могут быть дефолтные значения, которые можно переопределить
@@ -69,7 +69,7 @@ class HexletCodeTest < Minitest::Test
 					f.input :job, as: :text
 				end
 
-		assert { result == File.open('fixtures/form_3.html').read }
+		assert { result == read_html_fixture(__method__.to_s) }
 	end
 
 	# пример с переопределением атрибутов rows and cols
@@ -78,6 +78,11 @@ class HexletCodeTest < Minitest::Test
 				  f.input :job, as: :text, rows: 50, cols: 50
 				end
 
-		assert { result == File.open('fixtures/form_4.html').read }
+		assert { result == read_html_fixture(__method__.to_s) }
+	end
+
+
+	def read_html_fixture(file_name)
+		File.open("#{__dir__}/fixtures/#{file_name}.html").read.gsub(/\n/, "")
 	end
 end

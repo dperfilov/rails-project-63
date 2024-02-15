@@ -1,6 +1,6 @@
 module TagModule
 
-	def build tag_name, params={}
+	def build tag_name, params={}, fields=[]
 	  # void elements area, base, br, col, embed, hr, img, input, link, meta, source, track, wbr
 	  unpaired = ['br', 'hr', 'img', 'input', 'link']
 
@@ -19,6 +19,9 @@ module TagModule
 	  if block_given?
 	    result << yield
 	  end
+
+	  # add fields as form content
+	  result << fields unless fields.empty?
 
 	  # for paired tags add closing part
 	  result << "</#{tag_name}>" if !unpaired.include? tag_name
