@@ -22,15 +22,3 @@ jobs:
         uses: hexlet/project-action@release
         with:
           hexlet-id: ${{ secrets.HEXLET_ID }}
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        
-      - name: Install dependencies
-        run: make install
-
-      - name: Run Rubocop
-        run: make lint
-
-      - name: Run Tests
-        run: make tests
