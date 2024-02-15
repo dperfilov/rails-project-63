@@ -33,6 +33,9 @@ module HexletCode
       params[:name] = value_key
       
 
+      # add label before each field
+      @fields << HexletCode::Tag.build('label', {for: value_key}) { value_key.capitalize }
+
       if field_type == 'input'
         # for imnput field
         params[:type] = 'text'
@@ -46,6 +49,15 @@ module HexletCode
 
         @fields << HexletCode::Tag.build(field_type, params) { value }
       end
+    end
+
+    def submit btnName='Save', params={}
+      # input type
+      params[:type] = 'submit'
+      # button name
+      params[:value] = btnName
+      
+      @fields << HexletCode::Tag.build('input', params)
     end
 
     def self.render_form form_template

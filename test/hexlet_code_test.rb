@@ -23,6 +23,9 @@ class HexletCodeTest < Minitest::Test
 
 		@UserWithGender = Struct.new(:name, :job, :gender, keyword_init: true)
 		@user_rob_with_gender = @UserWithGender.new name: 'rob', job: 'hexlet', gender: 'm'
+
+		@UserHexlet = Struct.new(:name, :job, keyword_init: true)
+		@user_hexlet = @UserHexlet.new job: 'hexlet'
 	end
 
 	def test_tags_builder
@@ -76,6 +79,26 @@ class HexletCodeTest < Minitest::Test
 	def test_form_4_with_default_values_override
 		result = HexletCode.form_for @user_rob_with_gender, url: '#' do |f|
 				  f.input :job, as: :text, cols: 50, rows: 50
+				end
+
+		assert { result == read_html_fixture(__method__.to_s) }
+	end
+
+	def test_form_5_with_submit_button
+		result = HexletCode.form_for @user_hexlet do |f|
+				  f.input :name
+				  f.input :job
+				  f.submit
+				end
+
+		assert { result == read_html_fixture(__method__.to_s) }
+	end
+
+	def test_form_6_with_submit_button_custom
+		result = HexletCode.form_for @user_hexlet do |f|
+				  f.input :name
+				  f.input :job
+				  f.submit 'Wow'
 				end
 
 		assert { result == read_html_fixture(__method__.to_s) }
