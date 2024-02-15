@@ -34,15 +34,15 @@ module HexletCode
       
 
       if field_type == 'input'
+        # for imnput field
         params[:type] = 'text'
         params[:value] = value
 
         @fields << HexletCode::Tag.build(field_type, params)
       else
         # for textarea field
-
-        params[:cols] = 20
-        params[:rows] = 40
+        params[:cols] = 20 unless params.key?(:cols)
+        params[:rows] = 40 unless params.key?(:rows)
 
         @fields << HexletCode::Tag.build(field_type, params) { value }
       end
@@ -67,7 +67,6 @@ module HexletCode
   end
 
 
-
   def self.form_for(user, params={})
     form_template = FormGenerator.new(user, **params)
 
@@ -82,31 +81,4 @@ module HexletCode
   #   yield(builded_form) if block_given?
   #   FormRender.render_html(builded_form.form_body)
   # end
-
-
 end
-
-
-# puts 'Module'.constantize
-
-User = Struct.new(:name, :job, :gender, keyword_init: true)
-user = User.new name: 'rob', job: 'hexlet', gender: 'm'
-
-form = HexletCode.form_for user do |f|
-  # Проверяет есть ли значение внутри name
-  f.input :name
-  # Проверяет есть ли значение внутри job
-  f.input :job, as: :text
-end
-
-puts form
-
-# puts HexletCode.form_for user do |f|
-# end
-
-# puts HexletCode.form_for user, url: '/users' do |f|
-# end
-
-
-
-

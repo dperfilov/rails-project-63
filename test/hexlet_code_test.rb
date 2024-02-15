@@ -75,7 +75,7 @@ class HexletCodeTest < Minitest::Test
 	# пример с переопределением атрибутов rows and cols
 	def test_form_4_with_default_values_override
 		result = HexletCode.form_for @user_rob_with_gender, url: '#' do |f|
-				  f.input :job, as: :text, rows: 50, cols: 50
+				  f.input :job, as: :text, cols: 50, rows: 50
 				end
 
 		assert { result == read_html_fixture(__method__.to_s) }

@@ -8,5 +8,3 @@ arr << "bla"
 
 
 puts 'bla \n bla'.gsub(/\\n/, "")
-
-

@@ -23,7 +23,24 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
+Sample usage:
+
+    User = Struct.new(:name, :job, :gender, keyword_init: true)
+    user = User.new name: 'rob', job: 'hexlet', gender: 'm'
+
+    HexletCode.form_for user do |f|
+      f.input :name
+      f.input :job, as: :text
+    end
+
+    HexletCode.form_for user, url: '#' do |f|
+      f.input :name, class: 'user-input'
+      f.input :job
+    end
+
+    HexletCode.form_for user, url: '#' do |f|
+      f.input :job, as: :text, rows: 50, cols: 50
+    end
 
 ## Development
 
