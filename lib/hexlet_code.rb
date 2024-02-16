@@ -66,14 +66,21 @@ module HexletCode
 
     private
     def self.convert_params params
-      build_params = {}
+      # build_params = {}
 
       # 'action' attribute for form based on 'url' param
-      params.key?(:url) ? build_params[:action] = params[:url] : build_params[:action] = '#'
-      build_params[:method] = 'post'
+      if !params.key?(:action)
+        if params.key?(:url)
+          params[:action] = params.delete(:url) # replace 'url' key to 'action' key
+        else 
+          params[:action] = '#'
+        end
+      end
+
+      params[:method] = 'post'
 
 
-      build_params
+      params
     end
   end
 
