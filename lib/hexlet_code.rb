@@ -2,7 +2,6 @@
 
 require_relative "hexlet_code/version"
 require_relative 'tag_module'
-require 'active_support/inflector'
 
 module HexletCode
   class Error < StandardError; end
