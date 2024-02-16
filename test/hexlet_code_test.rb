@@ -42,8 +42,8 @@ class HexletCodeTest < Minitest::Test
     # user = @user.new name: 'rob'
 
     # почему то не работает передача параметра user без скобок
-    assert { @expected_forms[:basic] == HexletCode.form_for(@user_rob) { |f| } }
-    assert { @expected_forms[:with_url] == HexletCode.form_for(@user_rob, url: '/users') { |f| } }
+    assert { @expected_forms[:basic] == HexletCode.form_for(@user_rob) }
+    assert { @expected_forms[:with_url] == HexletCode.form_for(@user_rob, url: '/users') }
   end
 
   def test_form_1_with_fields
@@ -106,6 +106,8 @@ class HexletCodeTest < Minitest::Test
   end
 
   def read_html_fixture(file_name)
-    File.open("#{__dir__}/fixtures/#{file_name}.html").read.gsub(/\n/, '')
+    # File.open("#{__dir__}/fixtures/#{file_name}.html").read.gsub(/\n/, '')
+
+    File.read("#{__dir__}/fixtures/#{file_name}.html").gsub("\n", '')
   end
 end
