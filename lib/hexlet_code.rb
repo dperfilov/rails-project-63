@@ -77,8 +77,10 @@ module HexletCode
         end
       end
 
-      params[:method] = 'post'
-
+      # add default method
+      if !params.key?(:method)
+        params[:method] = 'post'
+      end
 
       params
     end
