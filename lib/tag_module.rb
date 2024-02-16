@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# module for building html elements elements and forms
 module TagModule
   def build(tag_name, params = {}, fields = [])
     # void elements area, base, br, col, embed, hr, img, input, link, meta, source, track, wbr

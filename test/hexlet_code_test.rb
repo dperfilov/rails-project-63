@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'test_helper'
 require_relative '../lib/hexlet_code'
 
@@ -17,14 +19,14 @@ class HexletCodeTest < Minitest::Test
       with_url: '<form action="/users" method="post"></form>'
     }
 
-    @User = Struct.new(:name, :job, keyword_init: true)
-    @user_rob = @User.new name: 'rob'
+    @user = Struct.new(:name, :job, keyword_init: true)
+    @user_rob = @user.new name: 'rob'
 
-    @UserWithGender = Struct.new(:name, :job, :gender, keyword_init: true)
-    @user_rob_with_gender = @UserWithGender.new name: 'rob', job: 'hexlet', gender: 'm'
+    @user_with_gender = Struct.new(:name, :job, :gender, keyword_init: true)
+    @user_rob_with_gender = @user_with_gender.new name: 'rob', job: 'hexlet', gender: 'm'
 
-    @UserHexlet = Struct.new(:name, :job, keyword_init: true)
-    @user_hexlet = @UserHexlet.new job: 'hexlet'
+    @user_hexlet = Struct.new(:name, :job, keyword_init: true)
+    @user_hexlet = @user_hexlet.new job: 'hexlet'
   end
 
   def test_tags_builder
@@ -36,8 +38,8 @@ class HexletCodeTest < Minitest::Test
   end
 
   def test_basic_form_generator
-    # @User = Struct.new(:name, :job, keyword_init: true)
-    # user = @User.new name: 'rob'
+    # @user = Struct.new(:name, :job, keyword_init: true)
+    # user = @user.new name: 'rob'
 
     # почему то не работает передача параметра user без скобок
     assert { @expected_forms[:basic] == HexletCode.form_for(@user_rob) { |f| } }

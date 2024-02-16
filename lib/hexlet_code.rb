@@ -3,13 +3,16 @@
 require_relative 'hexlet_code/version'
 require_relative 'tag_module'
 
+# basic module for form generator gem
 module HexletCode
   class Error < StandardError; end
 
+  # class extended by TagModule module
   class Tag
     extend TagModule
   end
 
+  # FormGenerator class
   class FormGenerator
     attr_accessor :user, :params, :fields
 
@@ -49,11 +52,11 @@ module HexletCode
       end
     end
 
-    def submit(btnName = 'Save', params = {})
+    def submit(btn_name = 'Save', params = {})
       # input type
       params[:type] = 'submit'
       # button name
-      params[:value] = btnName
+      params[:value] = btn_name
 
       @fields << HexletCode::Tag.build('input', params)
     end
