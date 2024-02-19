@@ -24,9 +24,8 @@ module HexletCode
 
     def input(value_key, params = {})
       # get field type from params ('as' parameter)
-      field_type = params.key?(:as) ? params[:as].to_s : 'input'
+      field_type = get_field_type(params)
       params.delete(:as)
-      field_type = 'textarea' if field_type == 'text'
 
       # get value from User object
       value = @user.public_send(value_key)
@@ -37,19 +36,7 @@ module HexletCode
       # add label before each field
       @fields << HexletCode::Tag.build('label', { for: value_key }) { value_key.capitalize }
 
-      if field_type == 'input'
-        # for imnput field
-        params[:type] = 'text'
-        params[:value] = value
-
-        @fields << HexletCode::Tag.build(field_type, params)
-      else
-        # for textarea field
-        params[:cols] = 20 unless params.key?(:cols)
-        params[:rows] = 40 unless params.key?(:rows)
-
-        @fields << HexletCode::Tag.build(field_type, params) { value }
-      end
+      @fields << generate_field(params, field_type, value)
     end
 
     def submit(btn_name = 'Save', params = {})
@@ -81,6 +68,33 @@ module HexletCode
       params[:method] = 'post' unless params.key?(:method)
 
       params
+    end
+
+    def get_field_type(params)
+      field_type = params.key?(:as) ? params[:as].to_s : 'input'
+      field_type = 'textarea' if field_type == 'text'
+
+      field_type
+    end
+
+    def generate_field(params, field_type, value)
+      result = ''
+
+      if field_type == 'input'
+        # for input field
+        params[:type] = 'text'
+        params[:value] = value
+
+        result = HexletCode::Tag.build(field_type, params)
+      else
+        # for textarea field
+        params[:cols] = 20 unless params.key?(:cols)
+        params[:rows] = 40 unless params.key?(:rows)
+
+        result = HexletCode::Tag.build(field_type, params) { value }
+      end
+
+      result
     end
   end
 
