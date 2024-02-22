@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
-autoload :HexletCode, 'hexlet_code/version'
-autoload :TagModule, 'tag_module'
+autoload :HexletCode, "#{__dir__}/hexlet_code/version"
+autoload :HexletCode, "#{__dir__}/hexlet_code/tag"
 
 module HexletCode
   class Error < StandardError; end
 
-  # class extended by TagModule module
-  class Tag
-    extend TagModule
-  end
-
-  # FormGenerator class
   class FormGenerator
     attr_accessor :user, :params, :fields
 

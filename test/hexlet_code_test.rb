@@ -2,6 +2,7 @@
 
 require_relative 'test_helper'
 require_relative '../lib/hexlet_code'
+require_relative '../lib/hexlet_code/tag'
 
 class HexletCodeTest < Minitest::Test
   def setup
