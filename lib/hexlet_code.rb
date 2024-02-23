@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 autoload :HexletCode, "#{__dir__}/hexlet_code/version"
-autoload :HexletCode, "#{__dir__}/hexlet_code/tag"
+# autoload :HexletCode, "#{__dir__}/hexlet_code/tag"
+require_relative 'hexlet_code/tag'
 
 module HexletCode
   class Error < StandardError; end
