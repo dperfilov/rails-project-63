@@ -2,10 +2,10 @@
 
 module HexletCode
   class FormGenerator
-    attr_accessor :user, :params, :fields
+    attr_accessor :entity, :params, :fields
 
-    def initialize(user, **params)
-      @user = user
+    def initialize(entity, **params)
+      @entity = entity
       @params = params
       @fields = []
     end
@@ -15,8 +15,8 @@ module HexletCode
       field_type = get_field_type(params)
       params.delete(:as)
 
-      # get value from User object
-      value = @user.public_send(value_key)
+      # get value from entity object
+      value = @entity.public_send(value_key)
 
       # add 'name' attribute
       params[:name] = value_key
