@@ -7,7 +7,7 @@ module HexletCode
     def initialize(entity, **params)
       @entity = entity
       @params = params
-      #@fields = []
+      # @fields = []
 
       @action = params.fetch(:url, '#')
       @method = params.fetch(:method, 'post')
@@ -15,11 +15,9 @@ module HexletCode
       @form_body = {
         inputs: [],
         submit: { options: nil },
-        form_options: { action: @action, method: @method}.merge(params.except(:url, :method))
+        form_options: { action: @action, method: @method }.merge(params.except(:url, :method))
       }
     end
-
-
 
     def input(value_key, params = {})
       # get field type from params ('as' parameter)
