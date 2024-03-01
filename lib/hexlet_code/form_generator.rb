@@ -2,13 +2,24 @@
 
 module HexletCode
   class FormGenerator
-    attr_accessor :entity, :params, :fields
+    attr_accessor :entity, :form_body
 
     def initialize(entity, **params)
       @entity = entity
       @params = params
-      @fields = []
+      #@fields = []
+
+      @action = params.fetch(:url, '#')
+      @method = params.fetch(:method, 'post')
+
+      @form_body = {
+        inputs: [],
+        submit: { options: nil },
+        form_options: { action: @action, method: @method}.merge(params.except(:url, :method))
+      }
     end
+
+
 
     def input(value_key, params = {})
       # get field type from params ('as' parameter)
@@ -22,9 +33,9 @@ module HexletCode
       params[:name] = value_key
 
       # add label before each field
-      @fields << HexletCode::Tag.build('label', { for: value_key }) { value_key.capitalize }
+      @form_body[:inputs] << HexletCode::Tag.build('label', { for: value_key }) { value_key.capitalize }
 
-      @fields << generate_field(params, field_type, value)
+      @form_body[:inputs] << generate_field(params, field_type, value)
     end
 
     def submit(btn_name = 'Save', params = {})
@@ -33,30 +44,28 @@ module HexletCode
       # button name
       params[:value] = btn_name
 
-      @fields << HexletCode::Tag.build('input', params)
+      @form_body[:inputs] << HexletCode::Tag.build('input', params)
     end
 
     def self.render_form(form_template)
-      HexletCode::Tag.build('form', convert_params(form_template.params), form_template.fields)
+      HexletCode::Tag.build('form', form_template.form_body[:form_options], form_template.form_body[:inputs])
     end
 
-    def self.convert_params(params)
-      # build_params = {}
+    # def self.convert_params(params)
+    #   # 'action' attribute for form based on 'url' param
+    #   unless params.key?(:action)
+    #     params[:action] = if params.key?(:url)
+    #                         params.delete(:url) # replace 'url' key to 'action' key
+    #                       else
+    #                         '#'
+    #                       end
+    #   end
 
-      # 'action' attribute for form based on 'url' param
-      unless params.key?(:action)
-        params[:action] = if params.key?(:url)
-                            params.delete(:url) # replace 'url' key to 'action' key
-                          else
-                            '#'
-                          end
-      end
+    #   # add default method
+    #   params[:method] = 'post' unless params.key?(:method)
 
-      # add default method
-      params[:method] = 'post' unless params.key?(:method)
-
-      params
-    end
+    #   params
+    # end
 
     def get_field_type(params)
       field_type = params.key?(:as) ? params[:as].to_s : 'input'
