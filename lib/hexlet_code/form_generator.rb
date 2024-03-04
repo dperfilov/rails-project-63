@@ -45,10 +45,6 @@ module HexletCode
       @form_body[:inputs] << HexletCode::Tag.build('input', params)
     end
 
-    def self.render_form(form_template)
-      HexletCode::Tag.build('form', form_template.form_body[:form_options], form_template.form_body[:inputs])
-    end
-
     # def self.convert_params(params)
     #   # 'action' attribute for form based on 'url' param
     #   unless params.key?(:action)
