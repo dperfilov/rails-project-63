@@ -38,23 +38,19 @@ class HexletCodeTest < Minitest::Test
   end
 
   def test_basic_form_generator
-    # почему то не работает передача параметра user без скобок
     assert { @expected_forms[:basic] == HexletCode.form_for(@user_rob) }
     assert { @expected_forms[:with_url] == HexletCode.form_for(@user_rob, url: '/users') }
   end
 
   def test_form_1_with_fields
     result = HexletCode.form_for @user_rob_with_gender do |f|
-      # Проверяет есть ли значение внутри name
       f.input :name
-      # Проверяет есть ли значение внутри job
       f.input :job, as: :text
     end
 
     assert { result == read_html_fixture(__method__.to_s) }
   end
 
-  # Для полей можно указать дополнительные атрибуты в виде хеша последним параметром
   def test_form_2_with_additional_attributes
     result = HexletCode.form_for @user_rob_with_gender, url: '#' do |f|
       f.input :name, class: 'user-input'
@@ -64,7 +60,6 @@ class HexletCodeTest < Minitest::Test
     assert { result == read_html_fixture(__method__.to_s) }
   end
 
-  # У полей могут быть дефолтные значения, которые можно переопределить
   def test_form_3_with_default_values
     result = HexletCode.form_for @user_rob_with_gender do |f|
       f.input :job, as: :text
@@ -73,7 +68,6 @@ class HexletCodeTest < Minitest::Test
     assert { result == read_html_fixture(__method__.to_s) }
   end
 
-  # пример с переопределением атрибутов rows and cols
   def test_form_4_with_default_values_override
     result = HexletCode.form_for @user_rob_with_gender, url: '#' do |f|
       f.input :job, as: :text, cols: 50, rows: 50
