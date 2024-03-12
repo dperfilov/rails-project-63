@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/inflector'
-
 module HexletCode
   class FormGenerator
     attr_accessor :entity, :form_body
