@@ -1,24 +1,12 @@
 module HexletCode
   module Inputs
-    class BaseInput
-    end
+    # autoload :Inputs, "#{__dir__}/hexlet_code/base_input"
+    autoload :BaseInput, "#{__dir__}/base_input"
 
-    class StringInput < BaseInput
-      def self.build(params, value)
-        params[:type] = 'text'
-        params[:value] = value
+    # autoload :Inputs, "#{__dir__}/hexlet_code/string_input"
+    autoload :StringInput, "#{__dir__}/string_input"
 
-        HexletCode::Tag.build('input', params)
-      end
-    end
-
-    class TextInput < BaseInput
-      def self.build(params, value)
-        params[:cols] = 20 unless params.key?(:cols)
-        params[:rows] = 40 unless params.key?(:rows)
-
-        HexletCode::Tag.build('textarea', params) { value }
-      end
-    end
+    # autoload :Inputs, "#{__dir__}/hexlet_code/text_input"
+    autoload :TextInput, "#{__dir__}/text_input"
   end
 end

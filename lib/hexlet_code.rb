@@ -9,6 +9,13 @@ module HexletCode
   autoload :FormRender, "#{__dir__}/hexlet_code/form_render"
 
   autoload :Inputs, "#{__dir__}/hexlet_code/inputs"
+  # autoload :BaseInput, "#{__dir__}/hexlet_code/base_input"
+
+  # autoload :Inputs, "#{__dir__}/hexlet_code/string_input"
+  # autoload :StringInput, "#{__dir__}/hexlet_code/string_input"
+
+  # autoload :Inputs, "#{__dir__}/hexlet_code/text_input"
+  # #autoload :TextInput, "#{__dir__}/hexlet_code/text_input"
 
   class Error < StandardError; end
 
