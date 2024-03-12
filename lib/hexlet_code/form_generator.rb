@@ -28,7 +28,7 @@ module HexletCode
 
       @form_body[:inputs] << HexletCode::Tag.build('label', { for: value_key }) { value_key.capitalize }
 
-      @form_body[:inputs] << generate_field(params, field_type, value)
+      @form_body[:inputs] << generate_input(params, field_type, value)
     end
 
     def submit(btn_name = 'Save', params = {})
@@ -38,29 +38,14 @@ module HexletCode
       @form_body[:inputs] << HexletCode::Tag.build('input', params)
     end
 
-    def get_field_type(params)
-      field_type = params.key?(:as) ? params[:as].to_s : 'input'
-      field_type = 'textarea' if field_type == 'text'
+    private
 
-      field_type
+    def get_field_type(params)
+      params.key?(:as) ? params[:as].to_s : 'string'
     end
 
-    def generate_field(params, field_type, value)
-      result = ''
-
-      if field_type == 'input'
-        params[:type] = 'text'
-        params[:value] = value
-
-        result = HexletCode::Tag.build(field_type, params)
-      else
-        params[:cols] = 20 unless params.key?(:cols)
-        params[:rows] = 40 unless params.key?(:rows)
-
-        result = HexletCode::Tag.build(field_type, params) { value }
-      end
-
-      result
+    def generate_input(params, field_type, value)
+      "HexletCode::Inputs::#{field_type.capitalize}Input".constantize.build(params, value)
     end
   end
 end
