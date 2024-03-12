@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/inflector'
-
 module HexletCode
   autoload :HexletCode, "#{__dir__}/hexlet_code/version"
   autoload :Tag, "#{__dir__}/hexlet_code/tag"
