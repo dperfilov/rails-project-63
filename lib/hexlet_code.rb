@@ -12,8 +12,8 @@ module HexletCode
 
   class Error < StandardError; end
 
-  def self.form_for(entity, params = {})
-    form_template = FormGenerator.new(entity, **params)
+  def self.form_for(entity, options = {})
+    form_template = FormGenerator.new(entity, **options)
 
     yield(form_template) if block_given?
 
