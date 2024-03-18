@@ -5,22 +5,23 @@ module HexletCode
 
   class Tag
     def self.build(tag_name, options = {}, fields = [])
-      result = []
-      result << '<'
-      result << tag_name
+      if SINGLE_TAGS.include?(tag_name)
+        return "<#{tag_name}#{tag_options(options)}>#{yield if block_given?}"
+      else
+        return "<#{tag_name}#{tag_options(options)}>#{fields.join}#{yield if block_given?}</#{tag_name}>"
+      end
+    end
 
+    private
+    def self.tag_options(options)
+      result = ""
       unless options.empty?
         options.each do |key, value|
-          result << " #{key}=\"#{value}\""
+          result += " #{key}=\"#{value}\""
         end
       end
 
-      result << '>'
-      result << yield if block_given?
-      result << fields unless fields.empty?
-      result << "</#{tag_name}>" unless SINGLE_TAGS.include? tag_name
-
-      result.join
+      result
     end
   end
 end
