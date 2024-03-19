@@ -21,19 +21,25 @@ module HexletCode
       options_modified = options.except(:as)
 
       value = @entity.public_send(value_key)
-
       options_modified[:name] = value_key
 
-      @form_body[:inputs] << HexletCode::Tag.build('label', { for: value_key }) { value_key.capitalize }
-
-      @form_body[:inputs] << generate_input(options_modified, field_type, value)
+      @form_body[:inputs] << {
+        options: options_modified,
+        field_type:,
+        value:,
+        label: {
+          options: { for: value_key },
+          body: value_key.capitalize
+        }
+      }
     end
 
     def submit(btn_name = 'Save', options = {})
-      options[:type] = 'submit'
-      options[:value] = btn_name
-
-      @form_body[:inputs] << HexletCode::Tag.build('input', options)
+      @form_body[:inputs] << {
+        options:,
+        field_type: 'submit',
+        value: btn_name
+      }
     end
 
     private
