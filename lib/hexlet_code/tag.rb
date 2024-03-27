@@ -28,6 +28,7 @@ module HexletCode
 
     def self.tag_options(options)
       result = ''
+
       unless options.empty?
         options.each do |key, value|
           result += " #{key}=\"#{value}\""

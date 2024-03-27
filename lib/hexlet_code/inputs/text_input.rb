@@ -12,7 +12,7 @@ module HexletCode
 
         input = HexletCode::Tag.build('textarea', options) { value }
 
-        self.label(options[:name]) + input
+        label(options[:name]) + input
       end
     end
   end

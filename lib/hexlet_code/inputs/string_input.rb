@@ -9,7 +9,7 @@ module HexletCode
 
         input = HexletCode::Tag.build('input', options)
 
-        self.label(options[:name]) + input
+        label(options[:name]) + input
       end
     end
   end
