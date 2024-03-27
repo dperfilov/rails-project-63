@@ -20,13 +20,3 @@ module HexletCode
     FormRender.render_form(form_template)
   end
 end
-
-User = Struct.new(:name, keyword_init: true)
-user = User.new name: 'rob'
-
-form = HexletCode.form_for user do |f|
-  f.input :name
-  f.submit
-end
-
-puts form
