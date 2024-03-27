@@ -5,20 +5,6 @@ require_relative '../lib/hexlet_code'
 
 class HexletCodeTest < Minitest::Test
   def setup
-    @expected_tags = {
-      br: '<br>',
-      img: '<img src="path/to/image">',
-      input: '<input type="submit" value="Save">',
-      label: '<label>Email</label>',
-      label_for: '<label for="email">Email</label>',
-      div: '<div></div>'
-    }
-
-    @expected_forms = {
-      basic: '<form action="#" method="post"></form>',
-      with_url: '<form action="/users" method="post"></form>'
-    }
-
     @user = Struct.new(:name, :job, keyword_init: true)
     @user_rob = @user.new name: 'rob'
 
@@ -29,18 +15,18 @@ class HexletCodeTest < Minitest::Test
     @user_hexlet = @user_hexlet.new job: 'hexlet'
   end
 
-  def test_tags_builder
-    assert { @expected_tags[:br] == HexletCode::Tag.build('br') }
-    assert { @expected_tags[:input] == HexletCode::Tag.build('input', type: 'submit', value: 'Save') }
-    assert { @expected_tags[:label] == HexletCode::Tag.build('label') { 'Email' } }
-    assert { @expected_tags[:label_for] == HexletCode::Tag.build('label', for: 'email') { 'Email' } }
-    assert { @expected_tags[:div] == HexletCode::Tag.build('div') }
+  def test_form_basic
+    result = HexletCode.form_for(@user_rob)
+
+    assert { result == read_html_fixture(__method__.to_s) }
   end
 
-  def test_basic_form_generator
-    assert { @expected_forms[:basic] == HexletCode.form_for(@user_rob) }
-    assert { @expected_forms[:with_url] == HexletCode.form_for(@user_rob, url: '/users') }
+  def test_form_basic_with_url
+    result = HexletCode.form_for(@user_rob, url: '/users')
+
+    assert { result == read_html_fixture(__method__.to_s) }
   end
+
 
   def test_form_1_with_fields
     result = HexletCode.form_for @user_rob_with_gender do |f|

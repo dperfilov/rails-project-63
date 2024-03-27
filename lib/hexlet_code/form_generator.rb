@@ -11,7 +11,7 @@ module HexletCode
 
       @form_body = {
         inputs: [],
-        submit: { options: nil },
+        submit: { options: nil, value: nil },
         form_options: { action: @action, method: @method }.merge(options.except(:url, :method))
       }
     end
@@ -27,11 +27,14 @@ module HexletCode
     end
 
     def submit(btn_name = 'Save', options = {})
-      @form_body[:inputs] << {
-        options:,
-        field_type: 'submit',
+      additional_options = {
+        type: 'submit',
         value: btn_name
       }
+
+      all_options = options.merge(additional_options)
+
+      @form_body[:submit] = { options: all_options }
     end
 
     private
