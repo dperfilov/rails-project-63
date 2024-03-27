@@ -10,7 +10,9 @@ module HexletCode
         options[:cols] = COLS unless options.key?(:cols)
         options[:rows] = ROWS unless options.key?(:rows)
 
-        HexletCode::Tag.build('textarea', options) { value }
+        input = HexletCode::Tag.build('textarea', options) { value }
+
+        self.label(options[:name]) + input
       end
     end
   end

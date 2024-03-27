@@ -27,7 +27,6 @@ class HexletCodeTest < Minitest::Test
     assert { result == read_html_fixture(__method__.to_s) }
   end
 
-
   def test_form_1_with_fields
     result = HexletCode.form_for @user_rob_with_gender do |f|
       f.input :name

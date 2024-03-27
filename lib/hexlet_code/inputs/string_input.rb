@@ -7,7 +7,9 @@ module HexletCode
         options[:type] = 'text'
         options[:value] = value
 
-        HexletCode::Tag.build('input', options)
+        input = HexletCode::Tag.build('input', options)
+
+        self.label(options[:name]) + input
       end
     end
   end

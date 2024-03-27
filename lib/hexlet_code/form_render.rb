@@ -3,7 +3,8 @@
 module HexletCode
   class FormRender
     def self.render_form(form_template)
-      HexletCode::Tag.build('form', form_template.form_body[:form_options], form_template.form_body[:inputs], form_template.form_body[:submit])
+      HexletCode::Tag.build('form', form_template.form_body[:form_options], form_template.form_body[:inputs],
+                            form_template.form_body[:submit])
     end
   end
 end

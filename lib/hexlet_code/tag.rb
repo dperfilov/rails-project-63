@@ -19,8 +19,8 @@ module HexletCode
     def self.generate_inputs(inputs)
       result = ''
       inputs.each do |input|
-        result += HexletCode::Tag.build('label', input[:label][:options]) { input[:label][:body] } if input[:label]
-        result += "HexletCode::Inputs::#{input[:field_type].capitalize}Input".constantize.build(input[:options], input[:value])
+        result += "HexletCode::Inputs::#{input[:field_type].capitalize}Input".constantize.build(input[:options],
+                                                                                                input[:value])
       end
 
       result

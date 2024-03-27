@@ -23,7 +23,7 @@ module HexletCode
       value = @entity.public_send(value_key)
       options_modified[:name] = value_key
 
-      @form_body[:inputs] << build_input_attributes(options_modified, field_type, value, value_key)
+      @form_body[:inputs] << build_input_attributes(options_modified, field_type, value)
     end
 
     def submit(btn_name = 'Save', options = {})
@@ -39,15 +39,11 @@ module HexletCode
 
     private
 
-    def build_input_attributes(options, field_type, value, value_key)
+    def build_input_attributes(options, field_type, value)
       {
         options:,
         field_type:,
-        value:,
-        label: {
-          options: { for: value_key },
-          body: value_key.capitalize
-        }
+        value:
       }
     end
 
