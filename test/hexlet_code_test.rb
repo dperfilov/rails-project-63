@@ -21,7 +21,7 @@ class HexletCodeTest < Minitest::Test
       test_form_2_with_additional_attributes: read_html_fixture('test_form_2_with_additional_attributes'),
       test_form_3_with_default_values: read_html_fixture('test_form_3_with_default_values'),
       test_form_4_with_default_values_override: read_html_fixture('test_form_4_with_default_values_override'),
-      test_form_5_with_submit_button: read_html_fixture('test_form_5_with_submit_button'),  
+      test_form_5_with_submit_button: read_html_fixture('test_form_5_with_submit_button'),
       test_form_6_with_submit_button_custom: read_html_fixture('test_form_6_with_submit_button_custom')
     }
   end
