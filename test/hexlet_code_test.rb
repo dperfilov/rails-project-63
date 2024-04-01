@@ -1,4 +1,4 @@
-  # frozen_string_literal: true
+# frozen_string_literal: true
 
 require_relative 'test_helper'
 require_relative '../lib/hexlet_code'
@@ -14,26 +14,28 @@ class HexletCodeTest < Minitest::Test
     @user_hexlet = Struct.new(:name, :job, keyword_init: true)
     @user_hexlet = @user_hexlet.new job: 'hexlet'
 
-    @test_form_basic = read_html_fixture('test_form_basic')
-    @test_form_basic_with_url = read_html_fixture('test_form_basic_with_url')
-    @test_form_1_with_fields = read_html_fixture('test_form_1_with_fields')
-    @test_form_2_with_additional_attributes = read_html_fixture('test_form_2_with_additional_attributes')
-    @test_form_3_with_default_values = read_html_fixture('test_form_3_with_default_values')
-    @test_form_4_with_default_values_override = read_html_fixture('test_form_4_with_default_values_override')
-    @test_form_5_with_submit_button = read_html_fixture('test_form_5_with_submit_button')
-    @test_form_6_with_submit_button_custom = read_html_fixture('test_form_6_with_submit_button_custom')
+    @forms = {
+      test_form_basic: read_html_fixture('test_form_basic'),
+      test_form_basic_with_url: read_html_fixture('test_form_basic_with_url'),
+      test_form_1_with_fields: read_html_fixture('test_form_1_with_fields'),
+      test_form_2_with_additional_attributes: read_html_fixture('test_form_2_with_additional_attributes'),
+      test_form_3_with_default_values: read_html_fixture('test_form_3_with_default_values'),
+      test_form_4_with_default_values_override: read_html_fixture('test_form_4_with_default_values_override'),
+      test_form_5_with_submit_button: read_html_fixture('test_form_5_with_submit_button'),  
+      test_form_6_with_submit_button_custom: read_html_fixture('test_form_6_with_submit_button_custom')
+    }
   end
 
   def test_form_basic
     result = HexletCode.form_for(@user_rob)
 
-    assert { result == @test_form_basic }
+    assert { result == @forms[:test_form_basic] }
   end
 
   def test_form_basic_with_url
     result = HexletCode.form_for(@user_rob, url: '/users')
 
-    assert { result == @test_form_basic_with_url }
+    assert { result == @forms[:test_form_basic_with_url] }
   end
 
   def test_form_1_with_fields
@@ -42,7 +44,7 @@ class HexletCodeTest < Minitest::Test
       f.input :job, as: :text
     end
 
-    assert { result == @test_form_1_with_fields }
+    assert { result == @forms[:test_form_1_with_fields] }
   end
 
   def test_form_2_with_additional_attributes
@@ -51,7 +53,7 @@ class HexletCodeTest < Minitest::Test
       f.input :job
     end
 
-    assert { result == @test_form_2_with_additional_attributes }
+    assert { result == @forms[:test_form_2_with_additional_attributes] }
   end
 
   def test_form_3_with_default_values
@@ -59,7 +61,7 @@ class HexletCodeTest < Minitest::Test
       f.input :job, as: :text
     end
 
-    assert { result == @test_form_3_with_default_values }
+    assert { result == @forms[:test_form_3_with_default_values] }
   end
 
   def test_form_4_with_default_values_override
@@ -67,7 +69,7 @@ class HexletCodeTest < Minitest::Test
       f.input :job, as: :text, cols: 50, rows: 50
     end
 
-    assert { result == @test_form_4_with_default_values_override }
+    assert { result == @forms[:test_form_4_with_default_values_override] }
   end
 
   def test_form_5_with_submit_button
@@ -77,7 +79,7 @@ class HexletCodeTest < Minitest::Test
       f.submit
     end
 
-    assert { result == @test_form_5_with_submit_button }
+    assert { result == @forms[:test_form_5_with_submit_button] }
   end
 
   def test_form_6_with_submit_button_custom
@@ -87,6 +89,6 @@ class HexletCodeTest < Minitest::Test
       f.submit 'Wow'
     end
 
-    assert { result == @test_form_6_with_submit_button_custom }
+    assert { result == @forms[:test_form_6_with_submit_button_custom] }
   end
 end
