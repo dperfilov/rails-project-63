@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+  # frozen_string_literal: true
 
 require_relative 'test_helper'
 require_relative '../lib/hexlet_code'
@@ -89,5 +89,4 @@ class HexletCodeTest < Minitest::Test
 
     assert { result == @test_form_6_with_submit_button_custom }
   end
-
 end
